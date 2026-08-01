@@ -1,0 +1,20 @@
+INTERVIEW - Intellixcore Company.py
+
+# Q1 You are given two sorted arrays (in ascending order) as input. Write a function that merges these two arrays and returns a new array that contains all the elements from both arrays, sorted in ascending order.
+# You cannot use any built-in sorting functions. You must leverage the fact that the two arrays are already sorted to achieve an efficient merge.
+# # Example 1
+# arr1 = [1, 3, 5, 7, 9]
+# arr2 = [2, 4, 6, 8]
+# print(merge_sorted_arrays(arr1, arr2)) 
+# # Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# # Example 2
+# arr1 = [1, 5, 7, 12]
+# arr2 = [2, 4, 6, 8, 9, 10]
+# print(merge_sorted_arrays(arr1, arr2))
+# # Output: [1, 2, 4, 5, 6, 7, 8, 9, 10, 12]
+
+def function_merges_two_arrays(sort):
+    arr1 = [1, 3, 5, 7, 9]
+    arr2 = [2, 4, 6, 8]
+print(sort)
+ 

@@ -1,0 +1,216 @@
+API Authentication
+This lesson introduces how to authenticate with APIs, a crucial step for securely accessing private data and services. Mastering these methods will enable you to work confidently with protected resources in your projects.
+
+  Exercise
+API authentication methods
+There are many ways a client can authenticate with an online service, you learned about the four most common ones for APIs.
+
+Each of these methods has it's own advantages and drawbacks, but do you remember which ones are the most secure?
+
+Instructions
+100XP
+Rank the API authentication methods from most secure (top) to least secure (bottom) by dragging them to the right position.
+
+  Exercise  ### MAYBE INCORRECT OUTPUT.
+Basic Authentication with requests
+Basic Authentication is the simplest authentication method for web APIs. It works like logging into a website. To gain access, you need to send your personal username and password along with every request. Using this username and password, the API can identify you and grant you access to the requested data.
+
+Let's first learn how a server responds when authentication fails, and then let's fix it by using Basic Authentication.
+
+Good to know:
+
+The requests package has already been imported.
+You can use the username john@doe.com and the password Warp_ExtrapolationsForfeited2 to authenticate.
+Instructions 2/2
+0 XP
+Create the correct authentication variable with your username and password.
+Then pass the authentication variable to the requests.get() method using the correct argument.
+
+Hint
+Requests uses a tuple containing the username and password to pass the credentials to the requests.get() method.
+Similar to how there is a params and data argument key for each HTTP method in requests, there is a similar one for authentication.
+Did you find this hint helpful?
+
+
+make: script.py file
+# Create the authentication tuple with the correct values for basic authentication
+authentication = ('john@doe.com', 'Warp_ExtrapolationsForfeited2')
+
+# Use the correct function argument to pass the authentication tuple to the API
+response = requests.get('http://localhost:3000/albums', auth=authentication)
+
+if(response.status_code == 200):
+    print("Success!")
+elif(response.status_code == 401):
+    print('Authentication failed')
+else:
+    print('Another error occurred')
+
+output:
+<script.py> output:
+    Authentication failed
+In [1]:
+
+
+Working with structured data
+This lesson introduces how to work with structured data in JSON format, a key skill for exchanging complex information with APIs. Mastering this will help you handle more realistic data scenarios in your projects.
+
+  Requesting JSON data from an API
+When working with complex data structures, JSON is a popular format used by many web APIs. However, APIs can respond in other formats, too. Therefore, it's crucial you know how to request a specific format from an API. You can achieve this by adding a header to your requests.
+
+Which of the following requests will return data formatted as JSON?
+
+Answer the question
+50XP
+Possible Answers
+Select one answer    ### 2ND OPTION IS CORRECT
+
+requests.get('https://api.datacamp.com', headers={'accept': 'json'})
+Press
+1
+
+requests.get('https://api.datacamp.com', headers={'accept': 'application/json'})
+Press
+2
+
+requests.get('https://api.datacamp.com', headers={'content-type': 'application/json'})
+Press
+3
+
+requests.get('https://api.datacamp.com', json=true)
+Press
+4
+
+
+
+Exercise
+Receiving JSON with the requests package
+When requesting JSON data from an API, the requests library makes it really easy to decode the JSON string you received from the API back into a Python object. In this exercise you'll first need to request data in the JSON format from the API, then decode the response into a Python object to retrieve and print the album Title property.
+
+Note: The requests package has been imported for you, and because the albums API is protected by authentication, the correct header has already been added.
+
+Instructions
+100 XP
+Add the correct header to request JSON from the API.
+Decode the JSON response into an album object.
+Print the album Title property.
+
+MAKE: script.py file
+# Create a dictionary containing the correct headers
+headers = {
+    'Authorization': 'Bearer ' + API_TOKEN,
+    'Accept': 'application/json'   # Header to request JSON formatted data
+}
+
+# Send a GET request to the API endpoint
+response = requests.get('http://localhost:3000/albums/1/', headers=headers)
+
+# Decode the JSON response into a Python object
+album = response.json()
+
+# Print the album Title property
+print(album['Title'])
+
+output:
+<script.py> output:
+    For Those About To Rock We Salute You
+In [1]:
+
+
+Exercise
+Sending JSON with the requests package
+Similar to how you can receive JSON text from an API response, you can also send JSON text to an API with POST or PUT requests. If you use the json argument for the request.post() and request.put() methods, the requests library will take care of adding all the necessary headers and encoding for you. Neat!
+
+Let's try it out! Did you know you can create multiple playlists at once using a POST request to the /playlists API? Just pass an array of playlists (each with a Name property) to the API and it will create them all at once.
+
+Instructions
+100 XP
+Pass the playlists variable as an argument to the requests.post() method so that it will be automatically sent as JSON.
+Get a list of all playlists from the API.
+Inspect the response of the GET request by printing the JSON text.
+
+make: script.py file
+# Create a list of playlists
+playlists = [
+    {"Name": "Rock ballads"},
+    {"Name": "My favorite songs"},
+    {"Name": "Road Trip"}
+]
+
+# POST the playlists array to the API using the json argument
+requests.post('http://localhost:3000/playLists/', json=playlists)
+
+# Get the list of all created playlists
+response = requests.get('http://localhost:3000/playLists')
+
+# Print the response text to inspect the JSON text
+print(response.text)
+
+output:
+
+<script.py> output:
+    [{"PlaylistId":1,"Name":"Classical music"},{"PlaylistId":2,"Name":"Classical music"},{"PlaylistId":3,"Name":"Pop"},{"PlaylistId":4,"Name":"Pop"},{"PlaylistId":5,"Name":"Rock ballads"},{"PlaylistId":6,"Name":"My favorite songs"},{"PlaylistId":7,"Name":"Road Trip"},{"PlaylistId":8,"Name":"Rock ballads"},{"PlaylistId":9,"Name":"My favorite songs"},{"PlaylistId":10,"Name":"Road Trip"}]
+
+
+Error handling
+This lesson focuses on handling errors when working with web APIs, a vital skill to ensure your data workflows are robust and reliable. Mastering error handling helps you prevent unexpected issues and keeps your projects running smoothly.
+
+Exercise
+Handling errors with Requests
+When the requests library is unable to connect to an API server, it will raise an exception. This exception allows you to detect if the API is available and act accordingly. But even when the request is successfully sent, we can still encounter errors. If we send an invalid request, a 4xx Client Error is returned from the API, if the server encounters an error, a 5xx Server Error is returned.
+
+The requests package provides a set of included exceptions that can be used to handle these errors using try/except statements.
+
+The requests package has already been imported for your convenience.
+
+Instructions 1/2
+50 XP
+1
+Import the exception class used to detect connection errors from the requests package, then use the imported class to intercept the error raised by the API request.
+
+make: script.py file
+# Import the correct exception class
+from requests.exceptions import HTTPError
+
+url = "http://localhost:3000/albums/"
+try:
+    r = requests.get(url)
+    # Enable raising errors for all error status codes
+    r.raise_for_status()
+    print(r.status_code)
+# Intercept the error
+except HTTPError as http_err:
+    print(f'HTTP error occurred: {http_err}')
+output:
+<script.py> output:
+    HTTP error occurred: 401 Client Error: Unauthorized for url: http://localhost:3000/albums/
+In [1]:
+
+
+Exercise
+Respecting API rate limits
+Let's put what we learned about error handling to the test. In this exercise you'll encounter a rate-limit error, which means you're sending too many requests to the server in a short amount of time. Let's fix it by implementing a workaround to circumvent the rate limit so our script doesn't fail.
+
+Your music library contains over 3500 music tracks, so let's try to find the longest track by checking the Length property of each track.
+
+But there is an issue, the /tracks API has a maximum page size of 500 items and has a rate-limit of 1 request per second. The script we've written is sending too many requests to the server in a short amount of time. Let's fix it!
+
+The requests and time packages are already imported, and we've created the following variables for you:
+
+longestTrackLength = 0
+longestTrackTitle = ""
+headers = {'Authorization': 'Bearer 8apDFHaNJMxy8Kt818aa6b4a0ed0514b5d3'}
+page_number = 1
+Instructions
+100 XP
+Start by running the exercise without making changes to the code, you'll notice that the console outputs a 429 Client Error indicating we are sending too many requests to the server in a short amount of time.
+Fix the script by adding a 3 second pause at the end of the while-loop using the sleep method from the time package.
+
+
+
+make: script.py file
+
+output: not correct.
+
+Final thoughts
+This lesson focuses on understanding how to handle errors and troubleshoot when working with APIs, a vital skill for building reliable data workflows. Mastering this will help you ensure your applications run smoothly and handle issues gracefully.

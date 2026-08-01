@@ -1,0 +1,317 @@
+Introduction to APIs
+This lesson introduces Web APIs, a key way to connect and share data between software systems over the internet. Understanding how to work with APIs will enable you to build integrations that expand your data capabilities.
+
+Description
+
+Dive into the exciting world of APIs as we introduce you to the basics of consuming and working with Web APIs using Python. This course is designed to demystify the concepts and practical applications of APIs. It offers you a hands-on introduction where you'll learn how to interact with a REST API and integrate it into your applications or workflows. By the end of this course, you'll have a comprehensive understanding of APIs and the confidence to apply your knowledge in real-world scenarios.
+
+
+The videos contain live transcripts you can reveal by clicking "Show transcript" at the bottom left of the videos.
+The course glossary can be found on the right in the resources section.
+To obtain CPE credits you need to complete the course and reach a score of 70% on the qualified assessment. You can navigate to the assessment by clicking on the CPE credits callout on the right.
+
+
+
+
+1. Making API Requests with Python
+
+100%
+This chapter introduces Web APIs, showing you how to make your first API requests with the requests Python package. You’ll learn about the key components of an API request, HTTP verbs, and how to build URLs and send & receive data. We’ll also cover headers and status codes, using a music catalog API for practical examples. By the end of this chapter you'll be able to confidently integrate a simple REST API with Python.
+
+
+
+
+2. More API request concepts
+
+25%
+In this chapter, you’ll learn how to authenticate with APIs, covering different methods like Basic and API key authentication using the requests package. We’ll then dive into working with structured data, focusing on requesting and handling JSON data. Finally, you’ll master error handling, including how to manage errors with requests, understand error types, and respect API rate limits.
+
+
+Exercise
+API requests with urllib
+For this course, you will be using the API for a Music Catalog application. This API has multiple features. You will start with the Lyrics API, which allows you to retrieve a quote from the Lyric of the day.
+
+Before you can make your first API request, you will need to know where the API can be accessed. This location is also referred to as the URL, short for Uniform Resource Locator. The URL will tell Python where to send the API request to. The URL for the Lyrics API is as follows: http://localhost:3000/lyrics/.
+
+Let's make a first request to the Lyrics API using the built-in urllib Python module.
+
+Instructions
+100 XP
+Use the read function on the response object to read the response data from the response object.
+Use the decode function to decode the response data into a string with the right encoding.
+
+
+
+make: script.py file.
+from urllib.request import urlopen
+
+with urlopen('http://localhost:3000/lyrics/') as response:
+  
+  # Use the correct function to read the response data from the response object
+  data = response.read()
+  encoding = response.headers.get_content_charset()
+
+  # Decode the response data so you can print it as a string later
+  string = data.decode(encoding)
+  
+  print(string)
+
+
+  output:
+  <script.py> output:
+    N' I never miss Cause I'm a problem child - AC/DC, Problem Child
+In [1]:
+
+
+Exercise
+Using the requests package
+Using urllib to integrate APIs can result in verbose and complex code as you need to take care of a lot of additional things like encoding and decoding responses.
+
+As an alternative to urllib, the requests Python package offers a simpler way to integrate APIs. A lot of functionality is available out of the box with requests, which makes your code a lot easier to write and read. Let's try the same exercise again but now with the requests package.
+
+Remember, as with the previous exercise, the URL for the Lyrics API is http://localhost:3000/lyrics.
+
+Instructions
+100 XP
+Import the requests package.
+Pass the URL http://localhost:3000/lyrics to the requests.get method.
+Print out the response text.
+
+
+make: script.py file
+# Import the requests package
+import requests
+
+# Pass the API URL to the get function
+response = requests.get('http://localhost:3000/lyrics')
+
+# Print out the text attribute of the response object
+print(response.text)
+
+output:
+# Import the requests package
+import requests
+
+# Pass the API URL to the get function
+response = requests.get('http://localhost:3000/lyrics')
+
+# Print out the text attribute of the response object
+print(response.text)
+N' I never miss Cause I'm a problem child - AC/DC, Problem Child
+
+The basic anatomy of an API request
+This lesson focuses on understanding the key components of URLs, which is essential for making effective API requests and integrating data from web services into your projects. Mastering this will help you communicate with APIs more confidently and build more dynamic data workflows.
+
+
+
+You learned about the basic anatomy of an API request and how to use the requests package in Python to interact with APIs.
+
+URL Components:
+
+Protocol: Determines the transportation method (e.g., http).
+Domain: The API server's address (e.g., localhost).
+Port: The gateway to the server (e.g., 3000).
+Path: Specifies the resource location (e.g., /lyrics/random).
+Query: Additional instructions for the request.
+HTTP Verbs:
+
+GET: Reads a resource.
+POST: Creates a resource.
+PUT: Updates a resource.
+DELETE: Removes a resource.
+Constructing URLs with Parameters: You learned to use the params argument in the requests package to add query parameters.
+
+import requests
+
+url = "http://localhost:3000/lyrics/random"
+params = {'artist': 'Adele', 'include_track': 'true'}
+response = requests.get(url, params=params)
+
+
+Creating and Deleting Resources: You practiced using the POST and DELETE methods to create and remove resources, respectively.
+
+# Creating a new playlist
+create_url = "http://localhost:3000/playlists"
+data = {'name': 'My New Playlist'}
+response = requests.post(create_url, data=data)
+
+# Deleting a playlist
+delete_url = "http://localhost:3000/playlists/1"
+response = requests.delete(delete_url)
+
+These skills will help you confidently integrate a simple REST API with Python.
+
+The goal of the next lesson is to understand how to handle different types of server responses and errors in API requests.
+
+Exercise
+Constructing a URL with parameters
+You can fine-tune your API requests using the path and query parameters of the URL. Let's learn how you can use HTTP verbs, URL paths, and parameters using the requests package.
+
+In this exercise, you will make another API request to the Lyrics API, but instead of getting today's lyric, you will send a request to the random lyrics API. You will then further customize the API request by adding query parameters to filter on specific artists and include the track title. Below, you can find the details needed to construct the correct URL.
+
+Component	Value
+Protocol	http
+Domain	localhost
+Port	3000
+Path	/lyrics/random
+Artist filter parameter	artist
+Include track parameter	include_track
+The requests library is already imported for your convenience.
+
+Instructions 1/3
+35 XP
+Construct the URL to the random lyrics API for the requests.get() method using the protocol, domain, port and path components.
+Note: Do not use the query parameters yet, we will add these in the next steps!
+
+make: script.py file
+# Construct the URL string and pass it to the requests.get() function
+response = requests.get('http://localhost:3000/lyrics/random')
+
+print(response.text)
+
+output:
+
+<script.py> output:
+    Exit light, enter night - Metallica
+In [1]:
+
+
+Exercise
+Creating and deleting resources using an API
+Now that you have learned how to construct a URL, you can send requests to specific API resources. Let's see what more you can do with HTTP verbs on these resources.
+
+In this exercise, you will use the playlists API available via http://localhost:3000/playlists/. This API offers the following actions:
+
+Verb	Path	Description
+GET	playlists	get a list of all playlists
+GET	/playlists/{PlaylistId}	get information on a single playlist using it's unique identifier PlaylistId
+POST	/playlists	create a new playlist
+DELETE	/playlists/{PlaylistId}	remove an existing playlist using it's unique identifier PlaylistId
+You will start by getting a list of all existing playlists, then you will learn how to create a new playlist and verify it's creation, and last you will learn how to remove an existing playlist.
+
+The requests library is already imported for your convenience.
+
+Instructions 1/4
+25 XP
+Get a list of all playlists from the playlists API.
+Create a dictionary with Name set to Rock Ballads, then perform a POST request with this dictionary as the data parameter.
+Perform a GET request to get information on the playlist with PlaylistId 2.
+Send a DELETE request to the URL for the playlist with PlaylistId 2 and get the list of existing playlists to confirm removal.
+
+
+
+make: script.py file
+# Perform a GET request to get info on playlist with PlaylistId 2
+response = requests.get('http://localhost:3000/playlists/2')
+
+print(response.text)
+
+output:
+<script.py> output:
+    [{"PlaylistId":1,"Name":"Classical music"},{"PlaylistId":2,"Name":"Classical music"},{"PlaylistId":3,"Name":"Pop"},{"PlaylistId":4,"Name":"Pop"},{"PlaylistId":5,"Name":"Rock Ballads"},{"PlaylistId":6,"Name":"Rock Ballads"}]
+In [1]:
+
+
+Headers and status codes
+This lesson builds on understanding how web APIs communicate, which is essential for integrating data and services into your projects. Mastering headers and status codes will help you troubleshoot and ensure your API requests are successful.
+
+Exercise
+Response codes and APIs
+When a client sends a request to a server, the server response includes a numeric status code, which is used to tell the client how the server responded to the request.
+
+In this exercise you will learn about the most important status codes you should know. We will send requests to valid and invalid paths and learn how we can access the status code to determine if our request was successful or not.
+
+The requests package comes with a built-in status code lookup object requests.codes you can use when you don't remember the exact numerical values.
+
+The requests package has been imported for you.
+
+Instructions 2/3
+25 XP
+Check if the server responded successfully with the 200 status code.
+Perform a request to the inexistent /movies path of the music catalog API.
+Check if the server responded with a status code indicating the resource was not found, providing the appropriate numerical status code representing this.
+
+Hint
+The correct numeric status code for "Not Found" is 404.
+Did you find this hint helpful?
+Check for response codes with a 200 OK and 404 Not found status code using the requests.codes lookup object.
+
+make:
+# Make a request to the movies endpoint of the API
+response = requests.get('http://localhost:3000/movies')
+
+if (response.status_code == 200):
+  print('The server responded succesfully!')
+  
+# Check the response status code
+elif (response.status_code == 404):
+  print('Oops, that API could not be found!')
+
+output:
+<script.py> output:
+    The server responded succesfully!
+
+Exercise
+Using request and response headers
+Headers contain additional information about your API calls, including the desired or used response format. Using accept and content-type headers, client and server can negotiate what response format to use.
+
+In this exercise, you'll use headers to inspect response formats after making a request and make a new request specifying the desired format via the accept header.
+
+The requests package has been imported for your convenience.
+
+Instructions 2/3
+25 XP
+Find out the content-type of the response by printing out the response content-type header.
+
+Find out what content-types the server can respond with by printing out the response accept header.
+
+
+Hint
+You can use square brackets [] to subset the accept header from the response.headers attribute.
+Did you find this hint helpful?
+
+make: script.py file
+response = requests.get('http://localhost:3000/lyrics')
+
+# Print the response accept header
+print(response.headers['accept'])
+
+output:
+
+<script.py> output:
+    text/plain; charset=utf-8
+In [1]:
+
+
+Exercise
+Handling content-types errors
+What happens when you ask for a response in a specific format but the server cannot satisfy that request? Say you want to receive the response in XML rather than JSON. If the server can not respond in XML, it will respond with a specific status-code indicating that it can't reply in the requested format. The status code used in this case is 406 Not Acceptable or 406 in short. The response from the server also frequently contains an accept header which includes a list of all response formats it can respond with. Use this to learn what content types the API can respond with.
+
+Instructions
+100 XP
+Add an accept header to request a response in the application/xml content-type from the server.
+Check if the server did not accept the request using the relevant status code.
+Print out a list of accepted content types from the server response.
+
+make: script.py file
+# Add a header to use in the request
+headers = {'accept':'application/xml'}
+response = requests.get('http://localhost:3000/lyrics', headers=headers)
+
+# Check if the server did not accept the request
+if (response.status_code == 406):
+  print('The server can not respond in XML')
+  
+  # Print the accepted content types
+  print('These are the content types the server accepts: ' + response.headers['accept'])
+else:
+  print(response.text)
+
+output:
+
+<script.py> output:
+    The server can not respond in XML
+    These are the content types the server accepts: application/json, text/plain
+In [1]:
+
+

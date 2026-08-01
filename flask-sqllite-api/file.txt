@@ -1,0 +1,1 @@
+A Flask REST API with SQLite that supports full CRUD operations for user management, with error handling and database initialization.

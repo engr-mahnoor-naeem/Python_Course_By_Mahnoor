@@ -1,0 +1,1 @@
+A curated set of Python mini-projects, games, and utilities to sharpen problem-solving using only the standard library. Run any script with python <file>.py
