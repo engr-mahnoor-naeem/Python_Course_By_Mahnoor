@@ -1,0 +1,17 @@
+Xs-and-Os:
+Project Description: Tic Tac Toe (Xs and Os) Tic Tac Toe, also known as Xs and Os, is a classic two-player game where players take turns marking spaces on a 3×3 grid. The goal is to align three of their marks (either "X" or "O") in a row, column, or diagonal before the opponent. If all spaces are filled without a winner, the game ends in a tie. 
+
+random-quiz-generator-and-grader:
+A Python-based Random Quiz Generator and Grader that selects random questions from a JSON file, presents them to the user, and calculates their score with time tracking.
+
+contact-management-list-app-system:
+The Contact Management System is a simple app that allows users to add, delete, and search contacts, storing the information in a JSON file for persistent Data Management.
+
+Command-Line-To-Do-List-Manager:
+This Python code implements a simple To-Do List application using JSON for data storage. It provides functionality to view, add, mark as completed, and delete tasks, all while saving the changes persistently in a tasks.json file.
+
+Adventure-Quest-Game:
+A simple text-based adventure game in Python. where the player makes choices to navigate the story. The game involves user inputs and decisions that lead to different outcomes, including winning or losing. Perfect for beginners learning Python.
+
+text_based_calculator:
+This is a basic calculator program in Python that performs addition, subtraction, multiplication, and division. It validates user inputs and handles errors like invalid numbers and division by zero.

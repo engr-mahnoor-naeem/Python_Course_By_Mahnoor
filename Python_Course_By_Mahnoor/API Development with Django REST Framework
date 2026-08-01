@@ -1,0 +1,37 @@
+# Django REST Framework with ML:
+what is an api?
+API stands for Application Programming Interface.
+It acts as a two-way communication bridge between frontend and backend.
+
+# what is REST API?
+REST stands for Representational State Transfer.
+It organizes how web applications talk to each other, separating what the user sees (frontend) from what runs behind the scenes (backend).
+
+# core principles of REST:
+stateless:
+the server doesn't store any information about the client between requests.
+
+client-server architecture:
+the app (client) asks for things (data) and the server does what's requested (sends data or makes changes).
+
+standardized interface:
+REST APIs rely on a set of standard methods (GET, POST, PUT, DELETE) for interacting with resources.
+
+GET - retrieving the resource
+POST - creating the resource
+PUT - updating the resource
+DELETE - deleting the resource
+
+easy-to-read data:
+REST APIs returns the response in a standardized to read formats, typically JSON or XML formats.
+
+RESTful Operations:
+GET, POST, PUT, DELETE
+
+                 URI
+GET              /students
+POST             /students
+PUT              /student/1
+DELETE           /student/1
+
+
